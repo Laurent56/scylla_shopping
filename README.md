@@ -57,9 +57,12 @@ System.out.println("Item 1 toTuple(): " + i1.toTuple());  \
 System.out.println("Item 2 toTuple(): " + i2.toTuple());  \
 
 Example 2: Create and test  Cart ojbect:  \
-A Cart is basically a wrapper around a collection of Items, and a Cart has the ability to checkOut() which would sum the costs of the Items to calculate a total cost. A cart has a method to display the contents of the Cart using the displayCart() method.
 
-Lastly a Cart has the ability to render itself as a String, using toString() or as a Tuple, using toTuple(). The Tuple would be used when persisting the Cart to the ScyllaDB carts table. 
+A Cart is basically a wrapper around a collection of Items, and a Cart has the ability to checkOut() which would sum the costs of the Items to calculate a total cost. A Cart is not "checked out" until the CartService persists the Cart to the ScyallDB, and it is the responsibility of the CartService to check out the Cart.  \
+
+A cart has a method to display the contents of the Cart using the displayCart() method.  \
+
+Lastly a Cart has the ability to render itself as a String, using toString() or as a Tuple, using toTuple(). The Tuple would be used when persisting the Cart to the ScyllaDB carts table.  \
 
 Cart c1 = new Cart("ompoint@gmail.com");  \
 		
