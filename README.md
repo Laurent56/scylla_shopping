@@ -110,14 +110,21 @@ Example 4: Persist the Cart to ScyllaDB  \
 		
 service.persist(c1);  \
 		
-Example 5: Remove an Item from the Cart:		
+Example 5: Remove an Item from the Cart:  \		
 // Remove the Jeep using the service:  \
 service.removeItemFromCart(i2, c1);  \
 service.displayCart(c1);  \
+
+The item should have been removed from the Cart on the Java side. So now we need to see the ScyllaDB side, to keep them in sync.  \
+
 service.displayCarts();  \
 service.persist(c1);  \
+service.displayCarts();  \
 
-Example 6: Close the CartService:  \		
+Example 6: Close the CartService:  \	
+
+This close() method is provided to close the Driver Session and the Driver Cluster objects connected to ScyllaDB, when you are done.
+
 service.close();  \
 
 If additional information is needed please open an Git issue and I will resolve it ASAP.
