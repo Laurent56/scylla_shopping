@@ -6,9 +6,10 @@ For various reasons, this version is using the original DataStax Java Driver.
 We will refactor this for the next version.
 There are only a few classes and interfaces at work to accomplish this, and the ScyallaDB instance is in the Cloud.
 
-The ScyllaDB table I created was:
+In ScyllaDB I created:
 
-CREATE TABLE carts (id text PRIMARY KEY, cart list<frozen <tuple<text, text, float>>>, total float, isCheckedOut boolean);
+1. A shopping keyspace: CREATE KEYSPACE IF NOT EXISTS shopping WITH REPLICATION = { 'class' : 'NetworkTopologyStrategy', 'AWS_US_EAST_1' : 3 }
+2. A carts table:       CREATE TABLE carts (id text PRIMARY KEY, cart list<frozen <tuple<text, text, float>>>, total float, isCheckedOut boolean);
 
 The Java types I created are:
 
