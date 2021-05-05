@@ -5,6 +5,11 @@ The original goal was to create a shopping cart Java application for ScyllaDB, u
 For various reasons, this version is using the original DataStax Java Driver.
 We will refactor this for the next version.
 There are only a few classes and interfaces at work to accomplish this, and the ScyallaDB instance is in the Cloud.
+
+The ScyllaDB table I created was:
+
+CREATE TABLE carts (id text PRIMARY KEY, cart list<frozen <tuple<text, text, float>>>, total float, isCheckedOut boolean);
+
 The Java types I created are:
 
 1. class CartService :: HAS-A DAO to work with ScyllaDB, and manage Carts.
