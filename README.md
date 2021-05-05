@@ -23,11 +23,16 @@ The Java types I created are:
 
 5. class ScyllaDAOImpl :: Implements the DAO contract.
 
-6. Two test classes to make sure this all works.
+6. Two test classes to make sure this all works: TestFramework.java and another to test the connection to the cluster.
 
 I put some Object to ScyllaDB Mapping (OSDBM) code in this project. We used to use ORM for Object Relational Mapping, but this is not a relational database.
 So the code I put here is to map a Java object to a ScyllaDB way of looking at life, basically an Adapter pattern.
 If you have any questions, please reach out to me directly. All code is by Laurent Weichberger: ompoint (at) gmail (dot) com.
+
+PART I:
+
+To run the ScyllaDB Shopping Cart example code use the class: src/main/java/TestFramework.java
+You can modify the contents of the TestFramework by commenting and uncommenting existing code, or writing new code to test the CartService, Cart, Item, and etc.
 
 Om.
 
