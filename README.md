@@ -40,69 +40,65 @@ Run Examples provided below:
 
 Example 1: Create and test Item object (Carts contain Items):
 
-Item i1 = new Item("SKU-75299", "LEGO Star Wars: The Mandalorian Trouble on Tatooine 75299 Awesome Toy Building Kit for Kids Featuring The Child, New 2021 (277 Pieces)", 29.99F);
+Item i1 = new Item("SKU-75299", "LEGO Star Wars: The Mandalorian Trouble on Tatooine 75299 Awesome Toy Building Kit for Kids Featuring The Child, New 2021 (277 Pieces)", 29.99F);\
 		
-Item i2 = new Item("SKU-42122", "LEGO Technic Jeep Wrangler 42122; an Engaging Model Building Kit for Kids Who Love High-Performance Toy Vehicles, New 2021 (665 Pieces)", 49.95F);
+Item i2 = new Item("SKU-42122", "LEGO Technic Jeep Wrangler 42122; an Engaging Model Building Kit for Kids Who Love High-Performance Toy Vehicles, New 2021 (665 Pieces)", 49.95F);\
 
-Use toString() to see the contents:
-System.out.println("Item 1 toString(): " + i1);
-System.out.println("Item 2 toString(): " + i2);
+Use toString() to see the contents:\
+System.out.println("Item 1 toString(): " + i1);\
+System.out.println("Item 2 toString(): " + i2);\
 
-Use toTuple() to see what will be sent to ScyllaDB:
-System.out.println("Item 1 toTuple(): " + i1.toTuple());
-System.out.println("Item 2 toTuple(): " + i2.toTuple());
+Use toTuple() to see what will be sent to ScyllaDB:\
+System.out.println("Item 1 toTuple(): " + i1.toTuple());\
+System.out.println("Item 2 toTuple(): " + i2.toTuple());\
 
-Example 2: Create and test  Cart ojbect:
-Cart c1 = new Cart("ompoint@gmail.com"); // Laurent's cart
+Example 2: Create and test  Cart ojbect:\
+Cart c1 = new Cart("ompoint@gmail.com");\
 		
-c1.addItem(i1);
-c1.addItem(i2);
+c1.addItem(i1);\
+c1.addItem(i2);\
 
-// Write cart contents to System.out
-c1.displayCart(); // Should be empty to test Service now...
+// Write cart contents to System.out\
+c1.displayCart(); // Should be empty to test Service now...\
 		
-// Test isCheckedOut ... should say false
-System.out.println("Is the cart c1 checked out?: " + c1.isCheckedOut());
+// Test isCheckedOut ... should say false\
+System.out.println("Is the cart c1 checked out?: " + c1.isCheckedOut());\
 		
-//Checkout the cart (currently this gives the total cost of the cart that's all):
-float cost = c1.checkOut();
-System.out.println("Cost of the cart belonging to: " + c1.getId() + ", is: $" + cost);
+//Checkout the cart (currently this gives the total cost of the cart that's all):\
+float cost = c1.checkOut();\
+System.out.println("Cost of the cart belonging to: " + c1.getId() + ", is: $" + cost);\
 		
-// Test remove Item from cart:
-System.out.println("REMOVE ITEM TEST: ");
-c1.displayCart();
+// Test remove Item from cart:\
+System.out.println("REMOVE ITEM TEST: ");\
+c1.displayCart();\
 
-// Remove that Jeep
-c1.removeItem(i2);
+// Remove that Jeep\
+c1.removeItem(i2);\
 
-// Jeep should be gone
-c1.displayCart();
+// Jeep should be gone\
+c1.displayCart();\
 
-Example 3: Create and test CartService (which HAS-a ScyllaDAO)
+Example 3: Create and test CartService (which HAS-A ScyllaDAO)\
 
-System.out.println("\n\n\n*** CartService Test with DAO implemented *** \n\n\n");
-CartService service = new CartService();
+CartService service = new CartService();\
 		
-// Service has a display cart let's test it:
-service.displayCart(c1);
-service.addItemToCart(i1, c1);
-service.addItemToCart(i2, c1);
-service.displayCart(c1);
+// Service has a display cart let's test it:\
+service.displayCart(c1);\
+service.addItemToCart(i1, c1);\
+service.addItemToCart(i2, c1);\
+service.displayCart(c1);\
 
-Example 4: Persist the Cart to ScyllaDB
-
-/* TEST THE DAO */
-System.out.println("INFO: About to persist using live connection to ScyllaDB Cloud...");
+Example 4: Persist the Cart to ScyllaDB\
 		
-service.persist(c1);
+service.persist(c1);\
 		
-// Remove the Jeep using the service:
-service.removeItemFromCart(i2, c1);
-service.displayCart(c1);
-service.displayCarts();
+// Remove the Jeep using the service:\
+service.removeItemFromCart(i2, c1);\
+service.displayCart(c1);\
+service.displayCarts();\
 		
-Example 5: Close the CartService:		
-service.close();
+Example 5: Close the CartService:\		
+service.close();\
 
 If additional information is needed please open an issue and I will resolve it ASAP.
 
