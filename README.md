@@ -17,7 +17,7 @@ The Java types I created are:
 
 1. class CartService :: HAS-A DAO to work with ScyllaDB, and manage Carts.
 
-2. class Cart :: This is the Java side of the Cart which will be persisted to ScyllaDB.
+2. class Cart :: This is shopping Cart which will be persisted to ScyllaDB.
 
 3. class Item :: What you want to purchase (put in the Cart)
 
@@ -25,7 +25,7 @@ The Java types I created are:
 
 5. class ScyllaDAOImpl :: Implements the DAO contract.
 
-6. Two test classes to make sure this all works: TestFramework.java and another class to test the connection to the cluster.
+6. Two test classes to make sure this all works: TestFramework.java (and another class to test the connection to the cluster).
 
 I put some Object to ScyllaDB Mapping (OSDBM) code in this project. We used to use ORM for Object Relational Mapping, but this is not a relational database.
 So the code I put here is to map a Java object to a ScyllaDB way of looking at life, basically an Adapter pattern.
@@ -91,6 +91,13 @@ c1.displayCart();  \
 
 Example 3: Create and test CartService (which HAS-A ScyllaDAO)   \
 
+This CartService is backed by the Scylla DAO Implementation (class ScyllaDAOImpl) which does all the heavy lifting to and from ScyllaDB.
+
+The CartService provides convenience methods to work with a Cart and Items to add and remove items from the Cart, as well as to save a Cart to ScyllaDB with the persist() method.  \
+
+There are also method to display a single Cart, and also a mehtod to display all Carts (which displays all carts found in ScyllaDB). 
+Here is the example code for how to test this CartService:  \
+
 CartService service = new CartService();  \
 		
 // Service has a display cart let's test it:  \
@@ -103,16 +110,19 @@ Example 4: Persist the Cart to ScyllaDB  \
 		
 service.persist(c1);  \
 		
+Example 5: Remove an Item from the Cart:		
 // Remove the Jeep using the service:  \
 service.removeItemFromCart(i2, c1);  \
 service.displayCart(c1);  \
 service.displayCarts();  \
-		
-Example 5: Close the CartService:  \		
+service.persist(c1);  \
+
+Example 6: Close the CartService:  \		
 service.close();  \
 
-If additional information is needed please open an issue and I will resolve it ASAP.
+If additional information is needed please open an Git issue and I will resolve it ASAP.
 
 Om.
 
-Laurent
+Laurent Weichberger
+Big Data Bear, LLC
