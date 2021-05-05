@@ -40,65 +40,73 @@ Run Examples provided below:
 
 Example 1: Create and test Item object (Carts contain Items):
 
-Item i1 = new Item("SKU-75299", "LEGO Star Wars: The Mandalorian Trouble on Tatooine 75299 Awesome Toy Building Kit for Kids Featuring The Child, New 2021 (277 Pieces)", 29.99F);\
-		
-Item i2 = new Item("SKU-42122", "LEGO Technic Jeep Wrangler 42122; an Engaging Model Building Kit for Kids Who Love High-Performance Toy Vehicles, New 2021 (665 Pieces)", 49.95F);\
+Description: Items are what one would like to buy and add to a cart. The Item class is a wrapper around this data, and includes an Item ID, an Item description, and the cost of the Item in USD$.  You must have this information in order to create an Item.  \
 
-Use toString() to see the contents:\
-System.out.println("Item 1 toString(): " + i1);\
-System.out.println("Item 2 toString(): " + i2);\
+For example two LEGO toys:  \
 
-Use toTuple() to see what will be sent to ScyllaDB:\
-System.out.println("Item 1 toTuple(): " + i1.toTuple());\
-System.out.println("Item 2 toTuple(): " + i2.toTuple());\
+Item i1 = new Item("SKU-75299", "LEGO Star Wars: The Mandalorian Trouble on Tatooine 75299 Awesome Toy Building Kit for Kids Featuring The Child, New 2021 (277 Pieces)", 29.99F);  \
+		
+Item i2 = new Item("SKU-42122", "LEGO Technic Jeep Wrangler 42122; an Engaging Model Building Kit for Kids Who Love High-Performance Toy Vehicles, New 2021 (665 Pieces)", 49.95F);  \
 
-Example 2: Create and test  Cart ojbect:\
-Cart c1 = new Cart("ompoint@gmail.com");\
-		
-c1.addItem(i1);\
-c1.addItem(i2);\
+Use toString() to see the contents:  \
+System.out.println("Item 1 toString(): " + i1);  \
+System.out.println("Item 2 toString(): " + i2);  \
 
-// Write cart contents to System.out\
-c1.displayCart(); // Should be empty to test Service now...\
+Use toTuple() to see what will be sent to ScyllaDB:  \
+System.out.println("Item 1 toTuple(): " + i1.toTuple());  \
+System.out.println("Item 2 toTuple(): " + i2.toTuple());  \
+
+Example 2: Create and test  Cart ojbect:  \
+A Cart is basically a wrapper around a collection of Items, and a Cart has the ability to checkOut() which would sum the costs of the Items to calculate a total cost. A cart has a method to display the contents of the Cart using the displayCart() method.
+
+Lastly a Cart has the ability to render itself as a String, using toString() or as a Tuple, using toTuple(). The Tuple would be used when persisting the Cart to the ScyllaDB carts table. 
+
+Cart c1 = new Cart("ompoint@gmail.com");  \
 		
-// Test isCheckedOut ... should say false\
-System.out.println("Is the cart c1 checked out?: " + c1.isCheckedOut());\
+c1.addItem(i1);  \
+c1.addItem(i2);  \
+
+// Write cart contents to System.out  \
+c1.displayCart(); // Should be empty to test Service now...  \
 		
-//Checkout the cart (currently this gives the total cost of the cart that's all):\
+// Test isCheckedOut ... should say false  \
+System.out.println("Is the cart c1 checked out?: " + c1.isCheckedOut());  \
+		
+//Checkout the cart (currently this gives the total cost of the cart that's all):  \
 float cost = c1.checkOut();\
-System.out.println("Cost of the cart belonging to: " + c1.getId() + ", is: $" + cost);\
+System.out.println("Cost of the cart belonging to: " + c1.getId() + ", is: $" + cost);  \
 		
-// Test remove Item from cart:\
-System.out.println("REMOVE ITEM TEST: ");\
+// Test remove Item from cart:  \
+System.out.println("REMOVE ITEM TEST: ");  \
 c1.displayCart();\
 
-// Remove that Jeep\
-c1.removeItem(i2);\
+// Remove that Jeep  \
+c1.removeItem(i2);  \
 
-// Jeep should be gone\
-c1.displayCart();\
+// Jeep should be gone  \
+c1.displayCart();  \
 
-Example 3: Create and test CartService (which HAS-A ScyllaDAO)\
+Example 3: Create and test CartService (which HAS-A ScyllaDAO)   \
 
-CartService service = new CartService();\
+CartService service = new CartService();  \
 		
-// Service has a display cart let's test it:\
-service.displayCart(c1);\
-service.addItemToCart(i1, c1);\
-service.addItemToCart(i2, c1);\
-service.displayCart(c1);\
+// Service has a display cart let's test it:  \
+service.displayCart(c1);  \
+service.addItemToCart(i1, c1);  \
+service.addItemToCart(i2, c1);  \
+service.displayCart(c1);  \
 
-Example 4: Persist the Cart to ScyllaDB\
+Example 4: Persist the Cart to ScyllaDB  \
 		
-service.persist(c1);\
+service.persist(c1);  \
 		
-// Remove the Jeep using the service:\
-service.removeItemFromCart(i2, c1);\
-service.displayCart(c1);\
-service.displayCarts();\
+// Remove the Jeep using the service:  \
+service.removeItemFromCart(i2, c1);  \
+service.displayCart(c1);  \
+service.displayCarts();  \
 		
-Example 5: Close the CartService:\		
-service.close();\
+Example 5: Close the CartService:  \		
+service.close();  \
 
 If additional information is needed please open an issue and I will resolve it ASAP.
 
