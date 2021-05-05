@@ -16,17 +16,17 @@ In ScyllaDB I created:
 
 The Java types I created are:
 
-# 1. class CartService :: HAS-A DAO to work with ScyllaDB, and manage Carts.
+### 1. class CartService :: HAS-A DAO to work with ScyllaDB, and manage Carts.
 
-# 2. class Cart :: This is shopping Cart which will be persisted to ScyllaDB.
+### 2. class Cart :: This is shopping Cart which will be persisted to ScyllaDB.
 
-# 3. class Item :: What you want to purchase (put in the Cart)
+### 3. class Item :: What you want to purchase (put in the Cart)
 
-# 4. interface ScyllaDAO :: Contract for what it means to work with ScyllaDB.
+### 4. interface ScyllaDAO :: Contract for what it means to work with ScyllaDB.
 
-# 5. class ScyllaDAOImpl :: Implements the DAO contract.
+### 5. class ScyllaDAOImpl :: Implements the DAO contract.
 
-# 6. Two test classes to make sure this all works: TestFramework.java (and another class to test the connection to the cluster).
+### 6. Two test classes to make sure this all works: TestFramework.java (and another class to test the connection to the cluster).
 
 I put some Object to ScyllaDB Mapping (OSDBM) code in this project. We used to use ORM for Object Relational Mapping, but this is not a relational database.
 So the code I put here is to map a Java object to a ScyllaDB way of looking at life, basically an Adapter pattern.
